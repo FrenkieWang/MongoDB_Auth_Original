@@ -1,20 +1,16 @@
 const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-app.use(express.json());
 const cors = require("cors");
+const mongoose = require("mongoose");
+
+require('dotenv').config();
+
+const app = express();
+const port = process.env.PORT || 5000;
+
 app.use(cors());
-const bcrypt = require("bcryptjs");
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-const jwt = require("jsonwebtoken");
-
-const JWT_SECRET =
-  "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
-
-const mongoUrl =
-  "mongodb+srv://frenkiewang:afdkjpxx124@mytutorial.wx0gcon.mongodb.net/?retryWrites=true&w=majority";
+const mongoUrl = process.env.ATLAS_URI;
 
 mongoose
   .connect(mongoUrl, {
@@ -24,6 +20,21 @@ mongoose
     console.log("Connected to database");
   })
   .catch((e) => console.log(e));
+
+
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
+
+
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET =
+  "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
+
+
+
+
 
 require("./models/userModel");
 
@@ -100,8 +111,8 @@ app.post("/userData", async (req, res) => {
   } catch (error) { }
 });
 
-app.listen(5000, () => {
-  console.log("Server Started");
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
 });
 
 
