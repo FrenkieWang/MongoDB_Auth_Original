@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [fname, setFname] = useState("");
@@ -88,7 +89,7 @@ function SignUp() {
             </button>
           </div>
           <p className="forgot-password text-right">
-            Already registered <a href="/sign-in">sign in?</a>
+            Already registered <Link to={"/sign-in"}><b>Sign in?</b></Link>
           </p>
         </form>
       </div>

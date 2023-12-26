@@ -1,4 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -28,8 +29,11 @@ function Login() {
           alert("login successful");
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", true);
-
+          // Only if Auth succeed, then routes to Home Page.
           window.location.href = "./user-home";
+        }
+        else{
+          alert(data.error);
         }
       });
   }
@@ -66,7 +70,7 @@ function Login() {
             </button>
           </div>
           <p className="forgot-password text-right">
-            <a href="/sign-up">Sign Up</a>
+            <Link to={"/sign-up"}><b>Sign Up</b></Link> 
           </p>
         </form>
       </div>
