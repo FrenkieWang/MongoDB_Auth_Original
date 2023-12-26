@@ -8,7 +8,7 @@ function Login() {
     e.preventDefault();
 
     console.log(email, password);
-    fetch("http://localhost:5000/login-user", {
+    fetch("http://localhost:5000/user/login-user", {
       method: "POST",
       crossDomain: true,
       headers: {

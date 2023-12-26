@@ -17,7 +17,7 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => {
-    console.log("Connected to database");
+    console.log("MongoDB database connection established successfully");
   })
   .catch((e) => console.log(e));
 
@@ -32,16 +32,12 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-
-
-
-
 require("./models/userModel");
 
 const User = mongoose.model("UserInfo");
 
 // Register a User
-app.post("/register", async (req, res) => {
+app.post("/user/register", async (req, res) => {
   const { fname, lname, email, password} = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, 10);
@@ -64,7 +60,7 @@ app.post("/register", async (req, res) => {
 });
 
 // Login a User
-app.post("/login-user", async (req, res) => {
+app.post("/user/login-user", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
@@ -86,7 +82,7 @@ app.post("/login-user", async (req, res) => {
 });
 
 // get current userData
-app.post("/userData", async (req, res) => {
+app.post("/user/userData", async (req, res) => {
   const { token } = req.body;
   try {
     const user = jwt.verify(token, JWT_SECRET, (err, res) => {

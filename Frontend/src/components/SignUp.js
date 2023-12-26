@@ -10,7 +10,7 @@ function SignUp() {
     e.preventDefault();
 
     console.log(fname, lname, email, password);
-    fetch("http://localhost:5000/register", {
+    fetch("http://localhost:5000/user/register", {
       method: "POST",
       crossDomain: true,
       headers: {
